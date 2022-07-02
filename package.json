@@ -1,0 +1,12 @@
+{
+  "name": "hardhat-fundme",
+  "version": "1.0.0",
+  "description": "Building FundMe project using hardhat - a tutorial from freecodecamp by patrick collins",
+  "main": "index.js",
+  "author": "alliums-p <angnimas42@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "hardhat": "^2.9.9"
+  }
+}
