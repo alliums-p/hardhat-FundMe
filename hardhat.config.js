@@ -40,6 +40,7 @@ module.exports = {
             accounts: [PRIVATE_KEY],
             chainId: 4,
             timeout: 400000,
+            blockConfirmations: 6
         },
         localhost: {
             url: "http://127.0.0.1:8545/",
@@ -48,7 +49,19 @@ module.exports = {
         },
     },
     etherscan: {
-        apiKey: ETHERSCAN_API,
+        apiKey: {
+            rinkeby: ETHERSCAN_API
+        },
+        customChains: [
+            {
+                network: "rinkeby",
+                chainId: 4,
+                urls: {
+                    apiURL: "https://api-rinkeby.etherscan.io/api",
+                    browserURL: "https://rinkeby.etherscan.io",
+                }
+            }
+        ]
     },
     gasReporter: {
         enabled: false,
