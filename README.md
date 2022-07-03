@@ -1,14 +1,7 @@
 # hardhat-FundMe
  Building FundMe project using hardhat - a tutorial from freecodecamp by patrick collins
 
-Try running some of the following tasks:
-
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-node scripts/sample-script.js
-npx hardhat help
-```
+Through this lesson you can learn to:
+- Use `hardhat-deploy` for deployments and  ease of testing,
+- Use `hardhat-deploy-ethers` to use ether.js for `hardhat-deploy`,
+- Use `mocks` to use hardcoded contracts unavailable in development (chainlink contracts and similar)

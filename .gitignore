@@ -1,5 +1,4 @@
-node_modules
-
+.encryptedKey.json
 node_modules
 .env
 coverage
@@ -9,3 +8,6 @@ typechain
 #Hardhat files
 cache
 artifacts
+.DS_Store
+gas-report.txt
+deployments
