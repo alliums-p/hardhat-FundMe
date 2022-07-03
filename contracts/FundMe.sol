@@ -50,7 +50,7 @@ contract FundMe {
      */
     function fund() public payable {
         if(msg.value.getConversionRate(priceFeed) <= MINIMUM_USD) revert FundMe__NotEnoughETH();
-        
+
         addressToAmountFunded[msg.sender] += msg.value;
         funders.push(msg.sender);
     }
@@ -85,7 +85,7 @@ contract FundMe {
     }
 
     function getAddressToAmountFunded(address funder) public view returns (uint256) {
-        return addressToAmountFunded[address];
+        return addressToAmountFunded[funder];
     }
 
     function getPriceFeed() public view returns (AggregatorV3Interface) {
