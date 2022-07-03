@@ -7,6 +7,7 @@ Through this lesson you can learn to:
 - Use `mocks` to use hardcoded contracts unavailable in development (chainlink contracts and similar)
 - Use `NatSpec` for documentation for dev and user
 - Use `staging` and `unit` testing methods. 
+- Use `gas optimization` through the help of `gas-reporter`
 
 
 **Note**

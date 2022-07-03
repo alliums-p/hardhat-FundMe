@@ -5,6 +5,7 @@ import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 import "./PriceConverter.sol";
 
 error FundMe__NotOwner();
+error FundMe__NotEnoughETH();
 
 /**
     @title  A crowdfunding contract
@@ -15,14 +16,14 @@ error FundMe__NotOwner();
 contract FundMe {
     using PriceConverter for uint256;
 
-    mapping(address => uint256) public addressToAmountFunded;
-    address[] public funders;
+    mapping(address => uint256) private addressToAmountFunded;
+    address[] private funders;
 
     // Could we make this constant?  /* hint: no! We should make it immutable! */
-    address public immutable i_owner;
+    address private immutable i_owner;
     uint256 public constant MINIMUM_USD = 50 * 10 ** 18;
 
-    AggregatorV3Interface public immutable priceFeed;
+    AggregatorV3Interface private immutable priceFeed;
 
     modifier onlyOwner {
         // require(msg.sender == owner);
@@ -48,7 +49,8 @@ contract FundMe {
         @dev    This implements price feeds as our library
      */
     function fund() public payable {
-        require(msg.value.getConversionRate(priceFeed) >= MINIMUM_USD, "You need to spend more ETH!");
+        if(msg.value.getConversionRate(priceFeed) <= MINIMUM_USD) revert FundMe__NotEnoughETH();
+        
         addressToAmountFunded[msg.sender] += msg.value;
         funders.push(msg.sender);
     }
@@ -73,6 +75,23 @@ contract FundMe {
         (bool callSuccess, ) = i_owner.call{value: address(this).balance}("");
         require(callSuccess);
     }
+
+    function getOwner() public view returns (address) {
+        return i_owner;
+    }
+
+    function getFunder(uint256 index) public view returns (address) {
+        return funders[index];
+    }
+
+    function getAddressToAmountFunded(address funder) public view returns (uint256) {
+        return addressToAmountFunded[address];
+    }
+
+    function getPriceFeed() public view returns (AggregatorV3Interface) {
+        return priceFeed;
+    }
+
     // Explainer from: https://solidity-by-example.org/fallback/
     // Ether is sent to contract
     //      is msg.data empty?
